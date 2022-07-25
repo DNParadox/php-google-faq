@@ -39,7 +39,6 @@ $dataText = [
             'text1' => "I risultati di ricerca di Google rispecchiano i contenuti pubblicamente disponibili sul Web. I motori di ricerca non possono rimuovere i contenuti direttamente dai siti web, quindi rimuovere risultati di ricerca da Google non consente di rimuovere i contenuti dal Web. Se desideri
                          rimuovere qualcosa dal Web, devi contattare il webmaster del sito su cui sono pubblicati i contenuti e chiedergli di apportare una modifica. Inoltre, se, ai sensi delle leggi europee per la protezione dei dati, desideri richiedere la rimozione di determinate informazioni su di te visualizzate nei risultati di ricerca di Google, fai clic qui. Una volta che i contenuti saranno stati 
                         rimossi e che Google avrà rilevato l'aggiornamento, le informazioni non verranno più visualizzate nei risultati di ricerca di Google. In caso di una richiesta di rimozione urgente, è inoltre possibile visitare la nostra pagina di assistenza per avere ulteriori informazioni.",
-
         ],
       ],
       "Quando faccio clic sui risultati della Ricerca Google, le mie chiavi di ricerca vengono inviate ai siti web?" => 
@@ -50,9 +49,12 @@ $dataText = [
       ],
     ];
 
-
-
-// var_dump($dataText);
+    $dataHeader = [
+        'intro' => 'Introduzione',
+        'privacy' => 'Norme sulla Privacy',
+        'termini' => 'Termini di servizio',
+        'Tecnologie' => 'Domande Frequenti',
+    ];
 ?>
 
 <!DOCTYPE html>
@@ -66,26 +68,33 @@ $dataText = [
 </head>
 <body>
 <!-- Riscrivere questa pagina del sito google
-https://policies.google.com/faq
-Ci sono diverse domande con relative risposte.
-Gestire il “Database” e la visualizzazione di queste domande e risposte con PHP. -->
+    https://policies.google.com/faq
+    Ci sono diverse domande con relative risposte.
+    Gestire il “Database” e la visualizzazione di queste domande e risposte con PHP. -->
 
 <header>
-
+    <nav>
+        <ul class="d-flex">
+            <?php foreach($dataHeader as $data) { ?>
+                <li> <a href="#"> <?php echo $data ?> </a></li>
+            <?php } ?>
+        </ul>
+    </nav>
 </header>
 <main>
 <div class="container">
-<?php foreach($dataText as $question => $data_list){ ?>   
-    <h2> <?php echo $question ?> </h2>
-        <?php var_dump($question) ?>
-        <?php foreach($data_list as $answear){ ?> 
-        <?php foreach($answear as  $risposta) {?>
-    
-        <p> <?php echo $risposta; ?> </p>
-    
+    <!-- Con il primo Foreach troviamo la chiave che ci darà le domande  -->
+    <?php foreach($dataText as $question => $data_list){ ?>   
+        <!-- Question è la nostra chiave che ci stamperà soltanto le domande  -->
+        <h2> <?php echo $question ?> </h2>
+        <!-- Secondo Foreach per accedere alla lista di risposte da consegnare in pagina -->
+            <?php foreach($data_list as $answear){ ?> 
+                <!-- Terzo Foreach che ci stamperà dinamicamente tutte le risposte  -->
+                <?php foreach($answear as  $risposta) {?>
+                    <p class="paragraph"> <?php echo $risposta; ?> </p>
+            <?php } ?>
         <?php } ?>
     <?php } ?>
-<?php } ?>
 </div>
 </main>
 
